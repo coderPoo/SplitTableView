@@ -8,6 +8,15 @@
 ```
   
 ```
+@implementation XBSplitDataSource
+
+#pragma mark - UITableViewDataSource
+
+//
+-(instancetype)init{
+    return nil;
+}
+
 //初始化方法
 - (id)initWithItems:(NSArray *)items
      cellIdentifier:(NSString *)cellIdentifier
@@ -41,6 +50,8 @@
 - (id)itemIndexPath:(NSIndexPath *)indexPath{
     return self.items[indexPath.row];
 }
+
+@end
 ```
   
     
