@@ -1,0 +1,5 @@
+
+git init   查看xcode生产项目的.git地址
+rm -rf     .git 移除.git
+ls -a      查看是否还存在文件.git
+再导入仓库 git就可以检测到文件变化
