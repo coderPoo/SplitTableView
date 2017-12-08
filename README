@@ -1,4 +1,50 @@
 
+```
+ //注册cell 这个位置可以再封装一层
+    [self.tableView registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+    self.splitDS = [[XBSplitDataSource alloc] initWithItems:@[@"瘦身",@"再瘦身"] cellIdentifier:@"cell" configCellBlock:cellBlock];
+    //设置数据源 为 splitDS
+    self.tableView.dataSource = self.splitDS;
+```
+  
+```
+//初始化方法
+- (id)initWithItems:(NSArray *)items
+     cellIdentifier:(NSString *)cellIdentifier
+    configCellBlock:(TableViewCellConfigureBlock)configCellBlock{
+    
+    self = [super init];
+    if (self) {
+        self.items = items;
+        self.cellIdentifier = cellIdentifier;
+        self.configCellBlock = [configCellBlock copy];
+    }
+    
+    return self;
+}
+
+#pragma mark - uitableview dataSource
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return  self.items.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier forIndexPath:indexPath];
+    id item = [self itemIndexPath:indexPath];
+    self.configCellBlock(cell, item);
+    
+    return cell;
+}
+
+- (id)itemIndexPath:(NSIndexPath *)indexPath{
+    return self.items[indexPath.row];
+}
+```
+  
+    
+
 git init   查看xcode生产项目的.git地址
 rm -rf     .git 移除.git
 ls -a      查看是否还存在文件.git
